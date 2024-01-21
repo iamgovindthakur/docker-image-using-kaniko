@@ -30,4 +30,5 @@ jobs:
             --insecure \
             --skip-tls-verify \
             --skip-tls-verify-pull \
-            --insecure-pull
+            --insecure-pull \
+            --build-arg=DOCKER_ACCESS_TOKEN=${DOCKER_ACCESS_TOKEN}
