@@ -23,7 +23,7 @@ jobs:
         run: |
           docker run -v $(pwd):/workspace \
             -e DOCKER_CONFIG=/kaniko-secrets/docker_token \
-            gcr.io/kaniko-project/executor:latest \
+            gcr.io/kaniko-project/executor:51734fc3a33e04f113487853d118608ba6ff2b81 \
             --context=/workspace \
             --dockerfile=/workspace/app/Dockerfile \
             --destination=iamgovindthakur/my-kaniko-image:1.0
