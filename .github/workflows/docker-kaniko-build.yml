@@ -18,4 +18,4 @@ jobs:
           gcr.io/kaniko-project/executor:latest \
           --context=/workspace \
           --dockerfile=/workspace/app/Dockerfile \
-          --no-push
+          --destination=iamgovindthakur/my-kaniko-image:1.0
