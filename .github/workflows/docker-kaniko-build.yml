@@ -8,14 +8,22 @@ on:
 jobs:
   build:
     runs-on: self-hosted
-    steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
+    env:
+      DOCKER_USERNAME: ${{ secrets.test.DOCKER_USERNAME }}
+      DOCKER_ACCESS_TOKEN: ${{ secrets.test.DOCKER_ACCESS_TOKEN }}
 
-    - name: Build Docker Image
-      run: |
-        docker run -v $(pwd):/workspace \
-          gcr.io/kaniko-project/executor:latest \
-          --context=/workspace \
-          --dockerfile=/workspace/app/Dockerfile \
-          --destination=iamgovindthakur/my-kaniko-image:1.0
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Hub token
+        run: echo "DOCKER_ACCESS_TOKEN=${DOCKER_ACCESS_TOKEN}" >> $GITHUB_ENV
+
+      - name: Build Docker Image
+        run: |
+          docker run -v $(pwd):/workspace \
+            -e DOCKER_CONFIG=/kaniko-secrets/docker_token \
+            gcr.io/kaniko-project/executor:latest \
+            --context=/workspace \
+            --dockerfile=/workspace/app/Dockerfile \
+            --destination=iamgovindthakur/my-kaniko-image:1.0
