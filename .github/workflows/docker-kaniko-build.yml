@@ -26,4 +26,8 @@ jobs:
             gcr.io/kaniko-project/executor:51734fc3a33e04f113487853d118608ba6ff2b81 \
             --context=/workspace \
             --dockerfile=/workspace/app/Dockerfile \
-            --destination=iamgovindthakur/my-kaniko-image:1.0
+            --destination=iamgovindthakur/my-kaniko-image:1.0 \
+            --insecure \
+            --skip-tls-verify \
+            --skip-tls-verify-pull \
+            --insecure-pull
